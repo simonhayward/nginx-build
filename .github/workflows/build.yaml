@@ -4,8 +4,11 @@ on: push
 
 jobs:
   build:
-    name: Install required packages
-    runs-on: ubuntu-latest
+    env:
+        NGINX_VERSION: 1.19.4
+        NPS_VERSION: 1.13.35.2-stable
+    name: Build nginx
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -13,6 +16,12 @@ jobs:
       - name: Install requirements
         run: sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget
       
-      - name: Run install script
+      - name: Build
         run: bash ./build.sh
-    
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: nginx-${{ env.NGINX_VERSION }}
+          path: /opt/nginx/compiled
+        
+      

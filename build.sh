@@ -1,16 +1,14 @@
 #!/bin/bash
 set -exu
 
-NGINX_DIR=nginx
+sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev
+
+NGINX_DIR=/opt/nginx
 NGINX_SRC=${NGINX_DIR}/src
 NGINX_USER=nginx
 NGINX_GROUP=nginx
 
 mkdir -p ${NGINX_SRC}
-
-# required versions
-NGINX_VERSION=1.19.4
-NPS_VERSION=1.13.35.2-stable
 
 # pagespeed
 cd ${NGINX_SRC}
@@ -30,8 +28,5 @@ cd ${NGINX_SRC}
 wget http://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz
 tar -xvzf nginx-${NGINX_VERSION}.tar.gz
 cd nginx-${NGINX_VERSION}
-./configure --prefix=${NGINX_DIR}/compiled/${NGINX_VERSION} --user=${NGINX_USER} --group=${NGINX_GROUP} --with-http_ssl_module --with-http_stub_status_module --add-module=${NGINX_SRC}/${nps_dir} --with-http_v2_module
+./configure --prefix=${NGINX_DIR}/compiled/${NGINX_VERSION} --user=${NGINX_USER} --group=${NGINX_GROUP} --with-http_ssl_module --with-http_stub_status_module --add-module=${NGINX_SRC}/${NPS_DIR} --with-http_v2_module
 make && make install
-
-# test config
-${NGINX_DIR}/compiled/${NGINX_VERSION}/sbin/nginx -t -c ${NGINX_DIR}/compiled/${NGINX_VERSION}/conf/nginx.conf
