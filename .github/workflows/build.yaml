@@ -1,0 +1,18 @@
+name: build
+
+on: push
+
+jobs:
+  build:
+    name: Install required packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install requirements
+        run: sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget
+      
+      - name: Run install script
+        run: bash ./build.sh
+    
