@@ -19,6 +19,10 @@ jobs:
       - name: Build
         run: bash ./build.sh
       
+      - name: Config
+        run: |
+          cp ./nginx.conf /opt/nginx/compiled/${{ env.NGINX_VERSION }}/conf/nginx.conf
+          
       - uses: actions/upload-artifact@v2
         with:
           name: nginx-${{ env.NGINX_VERSION }}
