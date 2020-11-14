@@ -31,9 +31,7 @@ jobs:
           fi
 
       - name: Build
-        run: |
-          echo "buidling ${{ env.NGINX_VERSION }}"
-          bash ./build.sh
+        run: bash ./build.sh
         if: ${{ success() }}
       
       - name: Config
