@@ -1,23 +1,41 @@
 name: build
 
-on: push
+on:
+  schedule:
+    - cron:  '*/15 * * * *'
 
 jobs:
   build:
     env:
-        NGINX_VERSION: 1.19.4
         NPS_VERSION: 1.13.35.2-stable
     name: Build nginx
     runs-on: ubuntu-20.04
     steps:
+      - name: Install requirements
+        run: sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget jq
+      
+      - name: Get nginx release
+        run: |
+          NGINX_RELEASE=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/nginx/nginx/tags | jq -r .[2].name)
+          echo "NGINX_VERSION=${NGINX_RELEASE//release-}" >> $GITHUB_ENV
+
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+        run: |
+          if git rev-parse ${{ env.NGINX_VERSION }} >/dev/null 2>&1; then
+            echo "${{ env.NGINX_VERSION }} exists"
+            exit 1;
+          else
+            exit 0;
+          fi
 
-      - name: Install requirements
-        run: sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget
-      
       - name: Build
-        run: bash ./build.sh
+        run: |
+          echo "buidling ${{ env.NGINX_VERSION }}"
+          bash ./build.sh
+        if: ${{ success() }}
       
       - name: Config
         run: |
