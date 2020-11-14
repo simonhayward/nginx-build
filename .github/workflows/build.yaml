@@ -19,7 +19,6 @@ jobs:
           NGINX_RELEASE=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/nginx/nginx/tags | jq -r .[1].name)
           echo "NGINX_VERSION=${NGINX_RELEASE//release-}" >> $GITHUB_ENV
 
-      - name: Check nginx release
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
