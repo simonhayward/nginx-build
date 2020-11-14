@@ -1,8 +1,6 @@
 #!/bin/bash
 set -exu
 
-sudo apt-get install build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev
-
 NGINX_DIR=/opt/nginx
 NGINX_SRC=${NGINX_DIR}/src
 NGINX_USER=nginx
