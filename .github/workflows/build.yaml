@@ -19,11 +19,10 @@ jobs:
           NGINX_RELEASE=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/nginx/nginx/tags | jq -r .[2].name)
           echo "NGINX_VERSION=${NGINX_RELEASE//release-}" >> $GITHUB_ENV
 
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-        run: |
+      - run: |
           if git rev-parse ${{ env.NGINX_VERSION }} >/dev/null 2>&1; then
             echo "${{ env.NGINX_VERSION }} exists"
             exit 1;
