@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     env:
-        NPS_VERSION: 1.13.35.2-stable
+        NPS_VERSION: 1.14.36.1
     name: Build nginx
     runs-on: ubuntu-20.04
     steps:
