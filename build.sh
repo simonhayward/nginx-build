@@ -10,14 +10,11 @@ mkdir -p ${NGINX_SRC}
 
 # pagespeed
 cd ${NGINX_SRC}
-wget https://github.com/apache/incubator-pagespeed-ngx/archive/v${NPS_VERSION}.zip
-unzip v${NPS_VERSION}.zip
-NPS_DIR=$(find . -name "*pagespeed-ngx-${NPS_VERSION}" -type d)
+wget https://github.com/apache/incubator-pagespeed-ngx/archive/${NPS_COMMIT}.zip
+unzip ${NPS_COMMIT}.zip
+NPS_DIR=$(find . -name "*pagespeed-ngx-${NPS_COMMIT}" -type d)
 cd ${NPS_DIR}
-NPS_RELEASE_NUMBER=${NPS_VERSION/beta/}
-NPS_RELEASE_NUMBER=${NPS_VERSION/stable/}
-psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_RELEASE_NUMBER}.tar.gz
-[ -e scripts/format_binary_url.sh ] && psol_url=$(scripts/format_binary_url.sh PSOL_BINARY_URL)
+psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
 wget ${psol_url}
 tar -xzvf $(basename ${psol_url})
 
