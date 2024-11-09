@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Install requirements
-        run: sudo apt-get install jq build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget
+        run: sudo apt-get install jq build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget git g++ apt-utils autoconf automake libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf
       
       - name: Get nginx release
         run: |
@@ -57,7 +57,7 @@ jobs:
           release_name: Release ${{ env.NGINX_VERSION }}
           draft: false
           prerelease: false
-        if: "${{ env.NGINX_BUILD }}"
+        if: "${{ env.NGINX_BUILD && github.ref == 'refs/heads/main' }}"
 
       - name: Upload Release Asset
         id: upload-release-asset 
@@ -69,4 +69,4 @@ jobs:
           asset_path: /opt/nginx/compiled/${{ env.NGINX_VERSION }}.tar.gz
           asset_name: ${{ env.NGINX_VERSION }}.tar.gz
           asset_content_type: application/gzip
-        if: "${{ env.NGINX_BUILD }}"
+        if: "${{ env.NGINX_BUILD && github.ref == 'refs/heads/main' }}"
