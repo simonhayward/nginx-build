@@ -26,7 +26,7 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-           if git rev-parse ${{ env.NGINX_VERSION }} >/dev/null 2>&1; then
+          if git rev-parse ${{ env.NGINX_VERSION }} >/dev/null 2>&1; then
              echo "${{ env.NGINX_VERSION }} exists"
           else
             echo "NGINX_BUILD=1" >> $GITHUB_ENV
