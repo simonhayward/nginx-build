@@ -38,3 +38,5 @@ tar -xvzf nginx-${NGINX_VERSION}.tar.gz
 cd nginx-${NGINX_VERSION}
 ./configure --prefix=${NGINX_DIR}/compiled/${NGINX_VERSION} --user=${NGINX_USER} --group=${NGINX_GROUP} --with-http_ssl_module --with-http_stub_status_module --add-module=${NGINX_SRC}/${NPS_DIR} --with-http_v2_module --with-http_v3_module --with-debug --with-http_realip_module --with-compat --add-dynamic-module=${NGINX_SRC}/ModSecurity-nginx
 make && make install
+
+cp -r /usr/local/modsecurity ${NGINX_DIR}/compiled/${NGINX_VERSION}
