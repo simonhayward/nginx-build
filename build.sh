@@ -8,6 +8,15 @@ NGINX_GROUP=nginx
 
 mkdir -p ${NGINX_SRC}
 
+# modsecurity
+git clone https://github.com/owasp-modsecurity/ModSecurity
+cd ModSecurity/
+git submodule init
+git submodule update
+sh build.sh
+./configure
+make && make install
+
 # pagespeed
 cd ${NGINX_SRC}
 wget https://github.com/apache/incubator-pagespeed-ngx/archive/${NPS_COMMIT}.zip
