@@ -15,7 +15,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Install requirements
-        run: sudo apt-get install jq build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget git g++ apt-utils autoconf automake libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf
+        run: |
+          sudo apt-get update
+          sudo apt-get install jq build-essential zlib1g-dev libpcre3 libpcre3-dev unzip uuid-dev wget git g++ apt-utils autoconf automake libcurl4-openssl-dev libgeoip-dev liblmdb-dev libpcre++-dev libtool libxml2-dev libyajl-dev pkgconf
       
       - name: Get nginx release
         run: |
