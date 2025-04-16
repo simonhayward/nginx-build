@@ -27,9 +27,8 @@ wget https://github.com/apache/incubator-pagespeed-ngx/archive/${NPS_COMMIT}.zip
 unzip ${NPS_COMMIT}.zip
 NPS_DIR=$(find . -name "*pagespeed-ngx-${NPS_COMMIT}" -type d)
 cd ${NPS_DIR}
-psol_url=https://dl.google.com/dl/page-speed/psol/${NPS_VERSION}.tar.gz
-wget ${psol_url}
-tar -xzvf $(basename ${psol_url})
+wget http://www.tiredofit.nl/psol-${PSOL}.tar.xz
+tar xvf psol-${PSOL}.tar.xz
 
 # nginx
 cd ${NGINX_SRC}
