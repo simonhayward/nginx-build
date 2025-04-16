@@ -12,7 +12,7 @@ jobs:
         NPS_VERSION: 1.13.35.2-x64
         NPS_COMMIT: 71e24c1c47113acb5924d8cb523d572b376e9dd0
     name: Build nginx
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Install requirements
         run: |
